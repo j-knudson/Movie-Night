@@ -12,7 +12,7 @@
 class Stack
 {
 public:
-    typedef char Item;          //Typedef for the stack, currently set to a char
+    typedef std::string Item;          //Typedef for the stack, currently set to a char
 
 
     //member constant
