@@ -25,7 +25,7 @@ int main()
     std::ifstream infile;                //variable for holding input file
     OpenInputFile(infile);              //call function to open input file 
 
-    srand(time(NULL));
+    srand(time(NULL));                  //generate a seed for the rand function to increase selection randomness
     
     Stack OddMovieStack, EvenMovieStack, TempStack; //create three stacks to hold movies 
 
@@ -58,29 +58,10 @@ int main()
     }
 
     
-    size_t odd_stack_count = OddMovieStack.size(); 
-    size_t even_stack_count = EvenMovieStack.size(); 
+    size_t odd_stack_count = OddMovieStack.size();      //count for odd stack
+    size_t even_stack_count = EvenMovieStack.size();    //count for even stack 
 
-    //test ***********************
-    std::cout << odd_stack_count << std::endl; 
-    std::cout << even_stack_count << std::endl;
-    //end test *******************************
-
-
-    /*while (OddMovieStack.size() > 0) {
-        std::string title;
-        title = OddMovieStack.pop(); 
-        std::cout << title <<std::endl; 
-        odd_stack_count--; 
-    }
-
-    /*while (EvenMovieStack.size() > 0) {
-        std::string title;
-        title = EvenMovieStack.pop();
-        std::cout << title << std::endl;
-    }*/
-
-    std::string random_movie;
+    std::string random_movie;       //create a variable to hold movie title for the randomly selected movie
     while (odd_stack_count > 0 || even_stack_count > 0) {
      
         std::cout << "Please input a number used to randomly select a movie title: \n";     //get a random number from user 
@@ -107,10 +88,10 @@ int main()
             even_stack_count--;
         }
             
-        std::cout << "Your surprise movie is:  " << random_movie << std::endl;
+        std::cout << "Your surprise movie is:  " << random_movie << std::endl;      //print surprise movie selection
     }
 
-    if (odd_stack_count == 0 && even_stack_count == 0) {
+    if (odd_stack_count == 0 && even_stack_count == 0) {            //if both stacks are empty display message and quit 
         std::cout << "No other available films \n";
     }
 
