@@ -6,6 +6,7 @@ Randomly select and display a title to the user*/
 #include <cstdlib>			//for size_t and rand 
 #include <fstream>
 #include <string>           //for getline
+#include <time.h>           //for time() used with seeding 
 #include "StackADT.h"
 
 
@@ -24,6 +25,8 @@ int main()
     std::ifstream infile;                //variable for holding input file
     OpenInputFile(infile);              //call function to open input file 
 
+    srand(time(NULL));
+    
     Stack OddMovieStack, EvenMovieStack, TempStack; //create three stacks to hold movies 
 
     
