@@ -2,6 +2,11 @@
 Sort those titles into two stacks and then based on user input 
 Randomly select and display a title to the user*/
 
+
+//********************************NOTE*****************************************
+//Current maximum input file size is 84   Each movie stack can hold up to 42 titles 
+//To adjust maximum input file size change the capacity variable in StackADT.h
+
 #include <iostream> 
 #include <cstdlib>			//for size_t and rand 
 #include <fstream>
