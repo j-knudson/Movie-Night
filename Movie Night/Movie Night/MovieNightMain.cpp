@@ -21,8 +21,65 @@ void OpenInputFile(std::ifstream& in_f);
 
 std::string GetRandomTitle(Stack &source, int random_max);
 
+/*
+class CReadFile : Stack {
+    public: 
+        void readInput(Stack A, Stack B, ifstream& infile) {
+            int count = 0;                  //variable to help determine how many preceeeding characters need to be consumed before saving movie title string 
 
 
+            while (!infile.eof()) {
+                std::string line;   //create a variable to read a line of the file 
+                char ch;            //variable needed to consume the number and period preceeding the movie title in the txt
+                infile >> ch; infile >> ch; //consume first two characters
+
+                if (count >= 9) {   //If number preceeding title is a two digit number and another character needs to be consumed
+                    infile >> ch;
+                }
+
+                if (getline(infile, line))  //add a title to the odd movie stack 
+                    A.push(line);
+                count++;
+
+                //consume characters preceeding movie title
+                infile >> ch; infile >> ch; //consume first two characters
+                if (count >= 9) {   //If number preceeding title is a two digit number and another character needs to be consumed
+                    infile >> ch;
+                }
+
+                if (getline(infile, line))  //add a title to the even movie stack
+                    B.push(line);
+                count++;
+            }
+        }
+};
+*/
+
+class CRandom               //attempt to create a CRandom class as an aggregation of Stack 
+{
+private: 
+    Stack& m_stack;
+public:
+    CRandom(Stack& stack)
+        :m_stack{ stack }
+    {
+
+    }
+    std::string GetRandomTitle(int random_max)
+    {
+        int selection = rand() % random_max + 1;
+        Stack temp;
+        while (m_stack.size() > selection) {
+            temp.push(m_stack.pop());
+        }
+        std::string target = m_stack.pop();
+        while (temp.size() > 0) {
+            m_stack.push(temp.pop());
+        }
+        //std::cout << "Function found " << target <<std::endl; 
+        return target;
+    }
+};
 
 
 int main()
@@ -37,6 +94,12 @@ int main()
     
     int count = 0;                  //variable to help determine how many preceeeding characters need to be consumed before saving movie title string 
     
+    //**********TEST
+    CRandom odd{ OddMovieStack };
+    CRandom even{ EvenMovieStack };
+    //**********\TEST
+
+
 
     while (!infile.eof()) {
         std::string line;   //create a variable to read a line of the file 
@@ -62,12 +125,20 @@ int main()
         count++;
     }
 
-    
-    size_t odd_stack_count = OddMovieStack.size();      //count for odd stack
+    //********* TEST 
+      std::string movieTest = odd.GetRandomTitle(OddMovieStack.size());
+      std::cout << "I'm in test. This is odd movieTest: " << movieTest <<"\n";
+      movieTest = even.GetRandomTitle(EvenMovieStack.size());
+      std::cout << "I'm in test. This is even movieTest: " << movieTest << "\n";
+
+    //************* \TEST 
+
+
+    size_t odd_stack_count {OddMovieStack.size()};      //count for odd stack
     size_t even_stack_count = EvenMovieStack.size();    //count for even stack 
 
     std::string random_movie;       //create a variable to hold movie title for the randomly selected movie
-    while (odd_stack_count > 0 || even_stack_count > 0) {
+    while (odd_stack_count > 0 || even_stack_count > 0) {   //if there are still movie titles in either stasck   
      
         std::cout << "Please input a number used to randomly select a movie title: \n";     //get a random number from user 
         int user_random_number;  std::cin >> user_random_number; 
