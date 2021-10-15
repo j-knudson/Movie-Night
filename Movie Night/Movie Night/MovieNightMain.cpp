@@ -54,7 +54,7 @@ class CReadFile {
         }
 };
 
-
+//main file currently contains two classes, CRandom and CReadFile, that have not yet been moved to their own files 
 class CRandom               //attempt to create a CRandom class as an aggregation of Stack 
 {
 private: 
@@ -89,60 +89,19 @@ int main()
 
     srand(time(NULL));                  //generate a seed for the rand function to increase selection randomness
     
-    Stack OddMovieStack, EvenMovieStack, TempStack; //create three stacks to hold movies 
-
-    
-    int count = 0;                  //variable to help determine how many preceeeding characters need to be consumed before saving movie title string 
-    
-    //**********TEST
-    CRandom odd{ OddMovieStack };
-    CRandom even{ EvenMovieStack };
-    //**********\TEST
-
-
+    Stack OddMovieStack, EvenMovieStack; //create two stacks to hold movies 
+  
     CReadFile readfile{};   //create emtpy CReadFile
-
-    readfile.add(OddMovieStack); readfile.add(EvenMovieStack);
-    readfile.readInput(infile);
-
-    /*
-    while (!infile.eof()) {
-        std::string line;   //create a variable to read a line of the file 
-        char ch;            //variable needed to consume the number and period preceeding the movie title in the txt
-        infile >> ch; infile >> ch; //consume first two characters
-        
-        if (count >= 9) {   //If number preceeding title is a two digit number and another character needs to be consumed
-            infile >> ch; 
-        }
-        
-        if (getline(infile, line))  //add a title to the odd movie stack 
-            OddMovieStack.push(line);
-        count++;
-
-        //consume characters preceeding movie title
-        infile >> ch; infile >> ch; //consume first two characters
-        if (count >= 9) {   //If number preceeding title is a two digit number and another character needs to be consumed
-            infile >> ch;
-        }
-
-        if (getline(infile, line))  //add a title to the even movie stack
-            EvenMovieStack.push(line);
-        count++;
-    }
-    */
-
-    //********* TEST 
-    /*  std::string movieTest = odd.GetRandomTitle(OddMovieStack.size());
-      std::cout << "I'm in test. This is odd movieTest: " << movieTest <<"\n";
-      movieTest = even.GetRandomTitle(EvenMovieStack.size());
-      std::cout << "I'm in test. This is even movieTest: " << movieTest << "\n";
-*/
-    //************* \TEST 
+    readfile.add(OddMovieStack); readfile.add(EvenMovieStack);  //add our two stacks to readfile 
+    readfile.readInput(infile);                                 //call readfile readInput to add values from infile to the stacks 
 
 
     size_t odd_stack_count {OddMovieStack.size()};      //count for odd stack
     size_t even_stack_count = EvenMovieStack.size();    //count for even stack 
 
+
+    CRandom odd{ OddMovieStack };           //create two CRandom objects used for finding random values in the stacks
+    CRandom even{ EvenMovieStack };
     std::string random_movie;       //create a variable to hold movie title for the randomly selected movie
     while (odd_stack_count > 0 || even_stack_count > 0) {   //if there are still movie titles in either stasck   
      
@@ -194,19 +153,3 @@ void OpenInputFile(std::ifstream& in_f)    //function to open an input file
         in_f.open(input_filename.c_str());
     } while (in_f.fail());
 }
-
-/*
-std::string GetRandomTitle(Stack &source, int random_max)
-{
-    int selection = rand() % random_max + 1;   
-    Stack temp;
-    while (source.size() > selection) {
-        temp.push(source.pop());
-    }
-    std::string target = source.pop(); 
-    while (temp.size() > 0) {
-        source.push(temp.pop());
-    }
-    //std::cout << "Function found " << target <<std::endl; 
-    return target; 
-}*/
