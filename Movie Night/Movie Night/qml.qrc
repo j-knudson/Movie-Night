@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Background.qml</file>
+        <file>BackgroundForm.ui.qml</file>
+        <file>images/saywhat.jpg</file>
+        <file>images/BigSurprise.jpg</file>
+        <file>Circle.qml</file>
+        <file>CircleForm.ui.qml</file>
+        <file>Receiver.qml</file>
+        <file>Sender.qml</file>
+        <file>Bg.qml</file>
+        <file>BgForm.ui.qml</file>
+    </qresource>
+</RCC>
