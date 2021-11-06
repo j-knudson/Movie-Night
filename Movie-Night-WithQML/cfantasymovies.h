@@ -4,6 +4,7 @@
 #include <QObject>
 #include "stackadt.h"
 #include "crandom.h"
+#include <QVariant>
 
 
 
@@ -15,19 +16,28 @@ class CFantasyMovies : public QObject
 
 
 public:
-    explicit CFantasyMovies(QObject *parent = nullptr, Stack& oddStack, Stack& evenStack);
-    //explicit CFantasyMovies(QObject *parent = nullptr);
+    //explicit CFantasyMovies(Stack& oddStack, Stack& evenStack, QObject *parent = nullptr);
+
+    //***below is signals working constructor
+    explicit CFantasyMovies(QObject *parent = nullptr);
+    CFantasyMovies(const QString &movieTitle, const QString &userRandomNumber, const Stack &stackOdd, const Stack &stackEven, const CRandom &CRandom);
+
+
+
     Q_INVOKABLE void anotherFunction();
     Q_INVOKABLE QString getMovieTitle();
     Q_INVOKABLE QString getUserRandomNumber();
     QString movieTitle();
     QString userRandomNumber();
+    size_t size();
 
-    //CRandom& m_CRandom{};
+    //CRandom& m_CRandom{m_StackOdd, mStackEven};
+
+
 
 signals:
     void movieTitleChanged(QString);
-    void userRandomNumberChanged(QString);
+    void userRandomNumberChanged(QVariant data);
 
 public slots:
     void setMovieTitle(QString);
@@ -38,7 +48,10 @@ private:
     QString m_userRandomNumber;
     Stack  m_stackOdd;
     Stack  m_stackEven;
-    CRandom  m_CRandom;
+    CRandom m_CRandom{m_stackOdd, m_stackEven};
+    int classCounter = 0;
+
+
 
 
 };

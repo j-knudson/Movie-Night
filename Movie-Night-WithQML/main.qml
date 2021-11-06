@@ -3,6 +3,7 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.0
 
+
 //import Monty 1.0
 import Comms 1.0
 
@@ -10,7 +11,7 @@ Window {
     width: 640
     height: 480
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("Happy Belated Movie Night from John Knudson and Jacob Klockenga")
 
     /*SomeClass {
         id: myClass
@@ -21,24 +22,32 @@ Window {
 
     //QML Slot
     function qmlMovieUpdate(newTitle){
-        movieTitleText.text=newtitle
+        movieTitleText.text=newTitle
     }
+    property int counter: 0;
 
     CFantasyMovies {
         id: movies
     }
 
     Connections {
+
         target: movies
         //function onMovieTitleChanged(getMovieTitle) {movieTitleText.text = getMovieTitle}
         onMovieTitleChanged: {
-            movieTitleText.text = movies.getMovieTitle()
-            //numberInputField.text=""
-            //numberInputField.remove(0, 100)
+
+            //movieTitleText.text  = counter+movies.getUserRandomNumber();
+            //counter++;
+            //movieTitleText.text = movies.getMovieTitle();
+            //movieTitleText.text = counter+movies.getMovieTitle();
+            counterText.text = 10-counter;
         }
         onUserRandomNumberChanged: {
 
-            movies.setMovieTitle("This will be a movie "+movies.getUserRandomNumber())
+            //movies.setMovieTitle("This will be a movie "+movies.getUserRandomNumber())
+            counter++;
+            //movieTitleText.text  = counter+" "+movies.getUserRandomNumber();
+            //movieTitleText.text  = counter+" "+movies.getMovieTitle();
         }
     }
 
@@ -164,12 +173,12 @@ Window {
 
             Rectangle {
                 id: buttonRec
-                y: 79
-                height: 160
                 color: "#158f08"
                 anchors.left: parent.left
                 anchors.right: parent.right
+                anchors.top: parent.top
                 anchors.bottom: parent.bottom
+                anchors.topMargin: 79
                 anchors.rightMargin: -2
                 anchors.leftMargin: 2
                 anchors.bottomMargin: 0
@@ -234,7 +243,8 @@ Window {
 
             TextField {
                 id: movieTitleText
-                text: qsTr("Insert Movie Here")
+                //text: qsTr("Insert Movie Here")
+                text: movies.getMovieTitle()
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom

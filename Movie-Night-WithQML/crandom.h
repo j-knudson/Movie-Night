@@ -54,6 +54,8 @@ public:
     QString GetEvenTitle();
     Stack& GetOdd();
     Stack& GetEven();
+    size_t size();
+
 
     void test(QString);
 };
