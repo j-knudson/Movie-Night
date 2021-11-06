@@ -11,7 +11,6 @@ SOURCES += \
         crandom.cpp \
         creadfile.cpp \
         main.cpp \
-        someclass.cpp \
         stackadt.cpp
 
 RESOURCES += qml.qrc
@@ -31,7 +30,6 @@ HEADERS += \
     cfantasymovies.h \
     crandom.h \
     creadfile.h \
-    someclass.h \
     stackadt.h
 
 DISTFILES += \
