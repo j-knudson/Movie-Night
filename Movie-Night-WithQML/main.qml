@@ -24,11 +24,20 @@ Window {
     function qmlMovieUpdate(newTitle){
         movieTitleText.text=newTitle
     }
-    property int counter: 0;
+    property int counterMain: 0;
 
     CFantasyMovies {
         id: movies
     }
+
+    function counterUpdate() {
+    var counter = counterMain;
+        if(counter <= 10) {
+            counterText.text = 10-counter;
+        }
+        else
+            counterText.text = "No more movies";
+}
 
     Connections {
 
@@ -40,12 +49,13 @@ Window {
             //counter++;
             //movieTitleText.text = movies.getMovieTitle();
             //movieTitleText.text = counter+movies.getMovieTitle();
-            counterText.text = 10-counter;
+            //counterText.text = 10-counter;
+            counterUpdate();
         }
         onUserRandomNumberChanged: {
 
             //movies.setMovieTitle("This will be a movie "+movies.getUserRandomNumber())
-            counter++;
+            counterMain++;
             //movieTitleText.text  = counter+" "+movies.getUserRandomNumber();
             //movieTitleText.text  = counter+" "+movies.getMovieTitle();
         }
